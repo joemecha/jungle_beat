@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require '../lib/linked_list'
+require './lib/linked_list'
+require './lib/node'
  
 class LinkedListTest < Minitest::Test
   def setup
@@ -13,12 +14,16 @@ class LinkedListTest < Minitest::Test
  
   def test_it_has_attributes
     assert_nil @list1.head
+
+    @list1.append("doop")
     assert_equal Node, @list1.head.class 
-    assert_equal 0, @list1.count
+    assert_equal 1, @list1.count
   end
 
   def test_append 
-    assert_equal "doop", @list1.append("doop")
+    assert_nil @list1.head
+    @list1.append("doop")
+    assert_equal "doop", @list1.head.data 
   end
 
   def test_count
@@ -28,6 +33,7 @@ class LinkedListTest < Minitest::Test
   end
 
   def test_to_string
-    assert_equal "doop", @ll_1.to_string
+    @list1.append("doop")
+    assert_equal "doop", @list1.to_string
   end
 end
